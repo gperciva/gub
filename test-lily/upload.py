@@ -185,10 +185,12 @@ def upload_binaries (repo, version, version_db):
     git_tag_cmd = 'git --git-dir %(git_dir)s tag -m "" -a %(git_tag)s %(dirred_branch)s' % locals ()
     my_maintainer_git_username = maintainer_git_username
     git_push_cmd = 'git --git-dir %(git_dir)s push ssh+git://%(my_maintainer_git_username)s@git.sv.gnu.org/srv/git/lilypond.git/ refs/tags/%(git_tag)s:refs/tags/%(git_tag)s' % locals ()
+    git_push_cmd_gitlab = 'git --git-dir %(git_dir)s push git@gitlab.com:lilypond/lilypond.git refs/tags/%(git_tag)s:refs/tags/%(git_tag)s' % locals ()
     gub_tag_cmd = 'git tag -m "release of lilypond %(description)s (%(version_str)s-%(build)d)"  "gub-release-lilypond-%(version_str)s-%(build)d"' % locals ()
 
     cmds.append (git_tag_cmd)
     cmds.append (git_push_cmd)
+    cmds.append (git_push_cmd_gitlab)
 
     cmds.append (gub_tag_cmd)
     cmds.append ('make -f lilypond.make update-versions')
