@@ -23,6 +23,7 @@ class ImageMagick__tools (tools.AutoBuild):
                 + misc.join_lines ('''
 --without-magick-plus-plus
 --without-perl
+--disable-openmp
 '''))
     # Setting `CFLAGS' is not sufficient since ImageMagick's `configure'
     # script prepends stuff for libraries like libpng to `CFLAGS'.  We thus
