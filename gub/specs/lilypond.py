@@ -107,6 +107,22 @@ sheet music from a high-level description file.'''
         v = self.source.version ()
         self.runner.info ('LILYPOND-VERSION: %(v)s\n' % locals ())
         return v
+    def patch (self):
+        target.AutoBuild.patch (self)
+        # system::xetex uses system's shared libraries instead of GUB's ones.
+        self.file_sub ([('^exec xetex ', 'LD_LIBRARY_PATH= exec xetex ')],
+                       '%(srcdir)s/scripts/build/xetex-with-options.sh')
+
+        # system::xelatex uses system's shared libraries instead of GUB's ones.
+        self.file_sub ([('^exec xelatex ',
+                         'LD_LIBRARY_PATH= exec xelatex ')],
+                       '%(srcdir)s/scripts/build/xelatex-with-options.sh')
+    def configure (self):
+        target.AutoBuild.configure (self)
+        # tools::extractpdfmark uses system's libstdc++ instead of GUB's one.
+        self.file_sub ([('^EXTRACTPDFMARK = ([^L].*)$',
+                         'EXTRACTPDFMARK = LD_LIBRARY_PATH=%(tools_prefix)s/lib \\1')],
+                       '%(builddir)s/config.make')
     def install (self):
         target.AutoBuild.install (self)
         self.system ('cp %(tools_prefix)s/share/doc/texgyre/GUST-FONT-LICENSE.txt %(install_root)s/license/fonts-texgyre')
