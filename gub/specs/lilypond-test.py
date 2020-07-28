@@ -47,5 +47,26 @@ tar -C %(builddir)s -chjf %(test_ball)s
 --exclude 'fonts/source'
 input/regression/out-test
 '''))
+    def compile (self):
+        # system::xetex uses system's shared libraries instead of GUB's ones.
+        self.file_sub ([('^exec xetex ', 'LD_LIBRARY_PATH= exec xetex ')],
+                       '%(srcdir)s/scripts/build/xetex-with-options.sh')
+
+        # system::xelatex uses system's shared libraries instead of GUB's ones.
+        self.file_sub ([('^exec xelatex ',
+                         'LD_LIBRARY_PATH= exec xelatex ')],
+                       '%(srcdir)s/scripts/build/xelatex-with-options.sh')
+
+        # tools::extractpdfmark uses system's libstdc++ instead of GUB's one.
+        self.file_sub ([('^EXTRACTPDFMARK = ([^L].*)$',
+                         'EXTRACTPDFMARK = LD_LIBRARY_PATH=%(tools_prefix)s/lib \\1')],
+                       '%(builddir)s/config.make')
+
+        # Touch all targets to avoid rebuilds (ugh).
+        for d in [ 'python', 'scripts', 'flower', 'lily', 'mf' ]:
+            # Cannot use formatting because %(builddir)s must be passed as-is...
+            self.system('make -C %(builddir)s/' + d + ' --touch all')
+
+        lilypond.LilyPond_base.compile (self)
 
 Lilypond_test = LilyPond_test
