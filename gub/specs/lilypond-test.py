@@ -7,6 +7,7 @@ from gub.specs import lilypond
 class LilyPond_test (lilypond.LilyPond_base):
     dependencies = (lilypond.LilyPond_base.dependencies
                 + [
+                'tools::imagemagick',
                 'tools::netpbm',
                 'tools::fonts-dejavu',
                 'tools::fonts-libertine',

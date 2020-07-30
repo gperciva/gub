@@ -8,4 +8,5 @@ class Fontforge__tools (tools.AutoBuild):
     configure_flags = (tools.AutoBuild.configure_flags
                 + ' --without-cairo '
                 + ' --without-x '
-                + ' --enable-python-scripting=3 ')
+                + ' --enable-python-scripting=3 '
+                + ' PYTHON=%(tools_prefix)s/bin/python3 ')
