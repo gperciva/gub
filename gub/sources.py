@@ -40,7 +40,6 @@ gmp = join (gnu, 'gmp/gmp-4.2.1.tar.gz')
 icoutils = join (nongnu, 'icoutils/icoutils-0.26.0.tar.gz')
 libpng = join (sf, 'libpng/libpng-1.2.8-config.tar.gz')
 mftrace = join (lp, 'mftrace/mftrace-1.2.14.tar.gz')
-netpbm = join (gub, 'netpbm-patched-10.35.tar.bz2')
 pkg_config = 'https://pkg-config' + join (freedesktop, 'pkg-config-0.29.2.tar.gz')
 potrace = join (sf, 'potrace/potrace-1.7.tar.gz')
 python = 'https://www.python.org/ftp/python/%(version)s/Python-2.4.2.tar.bz2'
