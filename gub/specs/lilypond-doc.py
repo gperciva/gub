@@ -9,7 +9,6 @@ from gub.syntax import printf
 class LilyPond_doc (lilypond.LilyPond_base):
     dependencies = (lilypond.LilyPond_base.dependencies
                 + [
-                'tools::netpbm',
                 'tools::imagemagick',
                 'tools::rsync', # ugh, we depend on *rsync* !?
                 #'tools::texlive',

@@ -44,7 +44,6 @@ Website/documentation build requirements (lilypond-doc package):
 
   mftrace, http://www.cs.uu.nl/people/hanwen/mftrace
   potrace, http://potrace.sourceforge.net
-  netpbm, http://netpbm.sourceforge.net
   t1utils, http://www.lcdf.org/~eddietwo/type/
 
 Recommended website/documentation build requirements:
