@@ -290,7 +290,7 @@ doc_url_base="$mirror/binaries/documentation"
 if test "$doc" = yes; then
     documentation="file://${prefix}/usr/share/doc/lilypond/html/index.html
     file://${prefix}/usr/share/info/dir"
-    docball=`echo $me | sed -e 's/[.][^.]\+[.]sh/.documentation.tar.bz2/'`
+    docball=`basename $me | sed -e 's/[.][^.]\+[.]sh/.documentation.tar.bz2/'`
     doc_url="$doc_url_base/$docball"
     if ! test -e $docball; then
 	echo "No ./$docball found, downloading."
